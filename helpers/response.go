@@ -1,5 +1,11 @@
 package helpers
 
+import (
+	"strconv"
+
+	"github.com/gin-gonic/gin"
+)
+
 type ResponseMeta struct {
 	Status  string `json:"status"`
 	Code    int    `json:"code"`
@@ -11,23 +17,32 @@ type APIResponse struct {
 	Data interface{}  `json:"data"`
 }
 
-func ResponseBody(status string, message string, data interface{}, code int) *APIResponse {
-	var httpCode int
+func Response(c *gin.Context, message string, data interface{}, code int) {
+	var status string
 
-	if status == "success" {
-		httpCode = 200
-	} else {
-		httpCode = 400
+	slice := strconv.Itoa(code)
+
+	switch slice[:1] {
+	case "2":
+		status = "success"
+	case "3":
+		status = "redirected"
+	case "4":
+		status = "client error"
+	case "5":
+		status = "server error"
+	default:
+		status = "unknown"
 	}
 
 	body := &APIResponse{
 		Meta: ResponseMeta{
 			Status:  status,
-			Code:    httpCode,
+			Code:    code,
 			Message: message,
 		},
 		Data: data,
 	}
 
-	return body
+	c.JSON(code, body)
 }

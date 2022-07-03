@@ -3,7 +3,6 @@ package controllers
 import (
 	"context"
 	"log"
-	"net/http"
 
 	"github.com/Go-MongoDB-REST/database"
 	"github.com/Go-MongoDB-REST/helpers"
@@ -35,9 +34,5 @@ func (controller BookControllerImp) FindAll(c *gin.Context) {
 
 	defer cursor.Close(c)
 
-
-
-	res := helpers.ResponseBody("success", "Get All Book Successfully", nil, 200)
-
-	c.JSON(http.StatusOK, res)
+	helpers.Response(c, "Get List Book Successfully", nil, 200)
 }
