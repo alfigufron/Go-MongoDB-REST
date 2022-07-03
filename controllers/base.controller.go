@@ -5,6 +5,6 @@ import (
 	"github.com/hexa/go-boilerplate-restapi/helpers"
 )
 
-func Ping(c *gin.Context) {
-	helpers.Response(c, "Ping Successfully!!", nil, 200)
+func Ping(ctx *gin.Context) {
+	helpers.Response(ctx, "Ping Successfully", nil, 200)
 }
