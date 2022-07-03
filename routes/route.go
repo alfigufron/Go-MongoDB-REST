@@ -3,8 +3,9 @@ package routes
 import (
 	"os"
 
+	"github.com/Go-MongoDB-REST/controllers"
+	"github.com/Go-MongoDB-REST/routes/v1"
 	"github.com/gin-gonic/gin"
-	"github.com/hexa/go-boilerplate-restapi/controllers"
 )
 
 func InitRouter() (route *gin.Engine) {
@@ -24,6 +25,11 @@ func InitRouter() (route *gin.Engine) {
 	apiGroup := route.Group("/api")
 	{
 		apiGroup.GET("/ping", controllers.Ping)
+
+		v1Group:=apiGroup.Group("/v1")
+		{
+			routes.BookRoutes(v1Group)
+		}
 	}
 
 	return

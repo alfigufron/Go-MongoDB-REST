@@ -1,26 +1,43 @@
 package controllers
 
 import (
+	"context"
+	"log"
 	"net/http"
 
+	"github.com/Go-MongoDB-REST/database"
+	"github.com/Go-MongoDB-REST/helpers"
 	"github.com/gin-gonic/gin"
-	"github.com/hexa/go-boilerplate-restapi/helpers"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type BookController interface {
-	FindAll(ctx *gin.Context)
+	FindAll(c *gin.Context)
 }
 
 type BookControllerImp struct {
-
+	UserCollection *mongo.Collection
 }
 
 func NewBookController() BookController {
-	return &BookControllerImp{}
+	client := database.DB
+	userCollection := database.GetCollection(client, "books")
+
+	return &BookControllerImp{UserCollection: userCollection}
 }
 
-func (controller BookControllerImp) FindAll(ctx *gin.Context) {
-	res := helpers.ResponseBody("success", "Ping Successfully", nil, 200)
+func (controller BookControllerImp) FindAll(c *gin.Context) {
+	cursor, err := controller.UserCollection.Find(context.TODO(), bson.D{})
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	ctx.JSON(http.StatusOK, res)
+	defer cursor.Close(c)
+
+
+
+	res := helpers.ResponseBody("success", "Get All Book Successfully", nil, 200)
+
+	c.JSON(http.StatusOK, res)
 }

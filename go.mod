@@ -1,4 +1,4 @@
-module github.com/hexa/go-boilerplate-restapi
+module github.com/Go-MongoDB-REST
 
 go 1.16
 

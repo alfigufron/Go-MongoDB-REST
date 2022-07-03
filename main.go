@@ -7,8 +7,9 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/hexa/go-boilerplate-restapi/routes"
-	"github.com/hexa/go-boilerplate-restapi/utils"
+	"github.com/Go-MongoDB-REST/database"
+	"github.com/Go-MongoDB-REST/routes"
+	"github.com/Go-MongoDB-REST/utils"
 	"github.com/joho/godotenv"
 )
 
@@ -20,7 +21,7 @@ func main() {
 	}
 
 	utils.InitLogger()
-	utils.InitMongoDB()
+	database.InitMongoDB()
 
 	router := routes.InitRouter()
 
@@ -31,8 +32,8 @@ func main() {
 	}
 
 	if err := server.ListenAndServe(); err != nil {
-		log.Fatal("Failed Start HTTP Server!")
 		log.Fatal(err)
+		log.Fatal("Failed Start HTTP Server!")
 	}
 }
 

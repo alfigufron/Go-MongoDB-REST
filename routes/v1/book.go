@@ -1,11 +1,11 @@
 package routes
 
 import (
+	"github.com/Go-MongoDB-REST/controllers"
 	"github.com/gin-gonic/gin"
-	"github.com/hexa/go-boilerplate-restapi/controllers"
 )
 
-func BookRoutes(route *gin.Engine) {
+func BookRoutes(route *gin.RouterGroup) {
 	bookController := controllers.NewBookController()
 
 	bookRoute := route.Group("/book")

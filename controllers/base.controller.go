@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/Go-MongoDB-REST/helpers"
 	"github.com/gin-gonic/gin"
-	"github.com/hexa/go-boilerplate-restapi/helpers"
 )
 
 func Ping(ctx *gin.Context) {
