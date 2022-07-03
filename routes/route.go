@@ -7,7 +7,7 @@ import (
 	"github.com/hexa/go-boilerplate-restapi/controllers"
 )
 
-func InitRouter() (engine *gin.Engine) {
+func InitRouter() (route *gin.Engine) {
 	debug := os.Getenv("APP_MODE")
 
 	switch debug {
@@ -19,9 +19,9 @@ func InitRouter() (engine *gin.Engine) {
 		gin.SetMode(gin.DebugMode)
 	}
 
-	engine = gin.New()
+	route = gin.New()
 
-	apiGroup := engine.Group("/api")
+	apiGroup := route.Group("/api")
 	{
 		apiGroup.GET("/ping", controllers.Ping)
 	}
