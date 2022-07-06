@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	"github.com/Go-MongoDB-REST/database"
@@ -48,8 +47,6 @@ func (controller BookControllerImp) Store(c *gin.Context) {
 		return
 	}
 
-	fmt.Print(bookModel.Name)
-
 	book := bson.D{
 		{Key: "Name", Value: bookModel.Name},
 		{Key: "Type", Value: bookModel.Type},
@@ -59,8 +56,6 @@ func (controller BookControllerImp) Store(c *gin.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Print(res)
 
 	helpers.Response(c, "Insert Book Successfuly", res, 200)
 }
