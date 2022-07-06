@@ -24,15 +24,15 @@ func Response(c *gin.Context, message string, data interface{}, code int) {
 
 	switch slice[:1] {
 	case "2":
-		status = "success"
+		status = "Success"
 	case "3":
-		status = "redirected"
+		status = "Redirected"
 	case "4":
-		status = "client error"
+		status = "Client Error"
 	case "5":
-		status = "server error"
+		status = "Server Error"
 	default:
-		status = "unknown"
+		status = "Unknown"
 	}
 
 	body := &APIResponse{

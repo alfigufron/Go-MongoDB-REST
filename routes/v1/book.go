@@ -8,8 +8,9 @@ import (
 func BookRoutes(route *gin.RouterGroup) {
 	bookController := controllers.NewBookController()
 
-	bookRoute := route.Group("/book")
+	bookRoute := route.Group("/books")
 	{
 		bookRoute.GET("/", bookController.FindAll)
+		bookRoute.POST("/", bookController.Store)
 	}
 }

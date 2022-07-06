@@ -36,6 +36,9 @@ func InitMongoDB() {
 
 func GetCollection(client *mongo.Client, collectionName string) *mongo.Collection {
 	MONGODB_DB := os.Getenv("MONGODB_DB")
+	if MONGODB_DB == "" {
+		panic("MONGODB_DB is not set")
+	}
 	collection := client.Database(MONGODB_DB).Collection(collectionName)
 
 	return collection

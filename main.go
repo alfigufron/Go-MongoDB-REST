@@ -21,6 +21,7 @@ func main() {
 	}
 
 	utils.InitLogger()
+	utils.InitTranslate()
 	database.InitMongoDB()
 
 	router := routes.InitRouter()
