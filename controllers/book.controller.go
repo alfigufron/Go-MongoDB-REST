@@ -9,7 +9,6 @@ import (
 	"github.com/Go-MongoDB-REST/helpers"
 	"github.com/Go-MongoDB-REST/models"
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator/v10"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -64,16 +63,4 @@ func (controller BookControllerImp) Store(c *gin.Context) {
 	fmt.Print(res)
 
 	helpers.Response(c, "Insert Book Successfuly", res, 200)
-}
-
-func ListOfErrors(model interface{}, e error) []map[string]string {
-	ve := e.(validator.ValidationErrors)
-	InvalidFields := make([]map[string]string, 0)
-
-	for _, e := range ve {
-			fmt.Print(e.Error())
-			return InvalidFields
-	}
-
-	return InvalidFields
 }
