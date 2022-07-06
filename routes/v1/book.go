@@ -12,5 +12,8 @@ func BookRoutes(route *gin.RouterGroup) {
 	{
 		bookRoute.GET("/", bookController.FindAll)
 		bookRoute.POST("/", bookController.Store)
+		bookRoute.GET("/:id", bookController.Detail)
+		bookRoute.PUT("/:id", bookController.Update)
+		bookRoute.DELETE("/:id", bookController.Delete)
 	}
 }
