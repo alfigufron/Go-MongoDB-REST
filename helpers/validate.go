@@ -7,7 +7,7 @@ import (
 )
 
 func Validate(c *gin.Context, m interface{}) int{
-	if err := c.ShouldBindQuery(&m); err != nil {
+	if err := c.ShouldBindJSON(&m); err != nil {
 		errs := err.(validator.ValidationErrors)
 		out := []string{}
 		for _, val := range errs.Translate(utils.Trans) {
